@@ -4,9 +4,10 @@ import 'package:get/get.dart';
 
 void main() {
    runApp(
-     const GetMaterialApp(
+     GetMaterialApp(
        title: "Águia Real App",
        initialRoute: AppPages.INITIAL,
+       getPages: AppPages.routes,
      ),
    );
 }

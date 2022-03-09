@@ -38,16 +38,8 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ],
                 ),
-                const Image(
-                  width: 30.0,
-                  height: 30.0,
-                  image: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/Google_Chat_icon_%282020%29.svg/1200px-Google_Chat_icon_%282020%29.svg.png'),
-                ),
-                const Image(
-                  width: 30.0,
-                  height: 30.0,
-                  image: NetworkImage('https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Windows_Settings_app_icon.png/640px-Windows_Settings_app_icon.png'),
-                ),
+                Icon(Icons.chat, color: Utils.greyLight, size: 40,),
+                Icon(Icons.settings, color: Utils.greyLight, size: 40,),
               ],
             ),
             const SizedBox(height: 15.0),
@@ -233,39 +225,17 @@ Widget _bottomNavigationBar() {
   return BottomNavigationBar(
     currentIndex: 1,
     onTap: null,
-    items:const [
+    items: [
       BottomNavigationBarItem(
-          icon: Image(
-            width: 30.0,
-            height: 30.0,
-            image: NetworkImage('https://cdn-icons-png.flaticon.com/512/25/25694.png'),
-          ),
-          label: 'Início'),
-      BottomNavigationBarItem(
-        icon: Padding(
-          padding: EdgeInsets.only(top: 8.0),
-          child: Image(
-            width: 40.0,
-            height: 40.0,
-            image: NetworkImage('https://flyclipart.com/thumb2/student-read-book-png-icon-free-download-369784.png'),
-          ),
-        ),
-        label: 'Meus Cursos',
+        icon: Icon(Icons.home, color: Utils.greyDark, size: 40),
+        label: 'Início',
       ),
       BottomNavigationBarItem(
-        icon: Image(
-          width: 30.0,
-          height: 30.0,
-          image: NetworkImage('https://cdn-icons-png.flaticon.com/512/29/29302.png'),
-        ),
+        icon: Icon(Icons.book, color: Utils.greyDark, size: 40,),
         label: 'Disciplinas',
       ),
       BottomNavigationBarItem(
-        icon: Image(
-          width: 30.0,
-          height: 30.0,
-          image: NetworkImage('https://cdn-icons-png.flaticon.com/512/162/162722.png'),
-        ),
+        icon: Icon(Icons.notifications, color: Utils.greyDark, size: 40,),
         label: 'Notificações',
       ),
     ],
