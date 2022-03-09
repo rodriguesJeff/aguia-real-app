@@ -1,8 +1,9 @@
+import 'package:aguia_real_dbv/src/modules/login/login_controller.dart';
 import 'package:aguia_real_dbv/src/shared/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class LoginView extends GetView {
+class LoginView extends GetView<LoginController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,23 +34,24 @@ class LoginView extends GetView {
                               color: Utils.darkBlue),
                         ),
                         const SizedBox(height: 10.0),
-                        TextFormField(                       
-                          decoration: InputDecoration(                          
+                        TextFormField(
+                          onChanged: controller.setUsername,
+                          decoration: InputDecoration(
                             prefixIcon: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Icon(Icons.person, color: Utils.greyDark, size: 40,),
                             ),
-                            hintText: 'Informe seu Email',
+                            hintText: 'Informe seu username',
                             border: OutlineInputBorder(
                               borderSide:
                                   BorderSide(width: 1, color: Utils.darkBlue),
                               borderRadius: BorderRadius.circular(15),
                             ),
                           ),
-                          style: const TextStyle(color: Colors.white),
                         ),
                         const SizedBox(height: 10.0),
                         TextFormField(
+                          onChanged: controller.setPassword,
                           obscureText: true,
                           decoration: InputDecoration(                          
                             prefixIcon: Padding(
@@ -63,23 +65,24 @@ class LoginView extends GetView {
                               borderRadius: BorderRadius.circular(15),
                             ),
                           ),
-                          style: const TextStyle(color: Colors.white),
                         ),
                         Container(
                           alignment: Alignment.centerRight,
                           padding: const EdgeInsets.only(top: 5.0, bottom: 5.0),
                           child: Text('Esqueceu a senha?', style: TextStyle(fontSize: 10.0, color: Utils.greyMid)),
                         ),
-                        GestureDetector(
-                          onTap: () {Get.toNamed('/home');},
-                          child: Container(
-                            width: 300.0,
-                            height: 55.0,
-                            decoration: BoxDecoration(
-                              color: Utils.greenAction,
-                              borderRadius: BorderRadius.circular(20.0),
+                        ElevatedButton(
+                          onPressed: () async {
+                            controller.isFormValid;
+                          },
+                          child: const Center(
+                            child: Text(
+                              'ENTRAR', 
+                              style: TextStyle(
+                                color: Colors.white, 
+                                fontSize: 20.0,
+                              ),
                             ),
-                            child: const Center(child: Text('ENTRAR', style: TextStyle(color: Colors.white, fontSize: 20.0))),
                           ),
                         ),
                         const SizedBox(height: 10.0),
