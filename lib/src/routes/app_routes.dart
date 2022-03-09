@@ -1,9 +1,11 @@
 part of 'app_pages.dart';
 
 abstract class Routes {
-    static const HOME = _Paths.HOME;
+    static const home = _Paths.home;
+    static const login = _Paths.login;
 }
 
 abstract class _Paths {
-    static const HOME = '/home';
+    static const home = '/home';
+    static const login = '/login';
 }

@@ -39,7 +39,12 @@ class HomeView extends GetView<HomeController> {
                   ],
                 ),
                 Icon(Icons.chat, color: Utils.greyLight, size: 40,),
-                Icon(Icons.settings, color: Utils.greyLight, size: 40,),
+                InkWell(
+                  onTap: () {
+                    Get.toNamed('/login');
+                  },
+                  child: Icon(Icons.logout, color: Utils.greyLight, size: 40,),
+                ),
               ],
             ),
             const SizedBox(height: 15.0),

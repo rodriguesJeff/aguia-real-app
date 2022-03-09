@@ -6,7 +6,7 @@ void main() {
    runApp(
      GetMaterialApp(
        title: "Águia Real App",
-       initialRoute: AppPages.INITIAL,
+       initialRoute: AppPages.initial,
        getPages: AppPages.routes,
      ),
    );
