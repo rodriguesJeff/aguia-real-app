@@ -66,6 +66,7 @@ class _EventPageState extends State<EventPage> implements EventView {
                       eventDate: e['date'],
                       finalEventDate: e['finalDate'],
                       eventMaxScore: e['maxScore'],
+                      onRemove: () => controller.removeEvent(e['objectId']),
                     ),
                 ],
               ),

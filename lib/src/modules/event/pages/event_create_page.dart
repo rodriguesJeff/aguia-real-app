@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:aguia_real_dbv/src/modules/event/event_controller.dart';
 import 'package:aguia_real_dbv/src/shared/utils.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
@@ -73,31 +70,6 @@ class _EventCreatePageState extends State<EventCreatePage> {
                       ),
                     ),
                     const SizedBox(height: 10.0),
-                    // GestureDetector(
-                    //   child: controller.pickedFile != null
-                    //       ? Container(
-                    //           width: 250,
-                    //           height: 250,
-                    //           decoration: BoxDecoration(
-                    //               border: Border.all(color: Colors.blue)),
-                    //           child: kIsWeb
-                    //               ? Image.network(controller.pickedFile!.path)
-                    //               : Image.file(
-                    //                   File(controller.pickedFile!.path)))
-                    //       : Container(
-                    //           width: 250,
-                    //           height: 250,
-                    //           decoration: BoxDecoration(
-                    //               border: Border.all(color: Colors.blue)),
-                    //           child: Center(
-                    //             child: Text(
-                    //                 'Click here to pick image from Gallery'),
-                    //           ),
-                    //         ),
-                    //   onTap: () async {
-                    //     controller.getImage();
-                    //   },
-                    // ),
                     Text(
                       'Nome do evento',
                       style: TextStyle(color: Utils.darkBlue, fontSize: 15.0),
@@ -106,6 +78,11 @@ class _EventCreatePageState extends State<EventCreatePage> {
                       initialValue: controller.eventName,
                       onChanged: controller.setEventName,
                       decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.description,
+                          color: Utils.greyDark,
+                          size: 25,
+                        ),
                         border: OutlineInputBorder(
                           borderSide:
                               BorderSide(width: 1, color: Utils.primaryColor),
@@ -123,6 +100,11 @@ class _EventCreatePageState extends State<EventCreatePage> {
                       child: TextFormField(
                         enabled: false,
                         decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.date_range,
+                            color: Utils.greyDark,
+                            size: 25,
+                          ),
                           label: Text(
                               '${controller.eventDate.day}/${controller.eventDate.month}/${controller.eventDate.year}'),
                           border: OutlineInputBorder(
@@ -143,6 +125,11 @@ class _EventCreatePageState extends State<EventCreatePage> {
                       child: TextFormField(
                         enabled: false,
                         decoration: InputDecoration(
+                          prefixIcon: Icon(
+                            Icons.date_range,
+                            color: Utils.greyDark,
+                            size: 25,
+                          ),
                           label: Text(
                               '${controller.finalEventDate.day}/${controller.finalEventDate.month}/${controller.finalEventDate.year}'),
                           border: OutlineInputBorder(
@@ -163,6 +150,11 @@ class _EventCreatePageState extends State<EventCreatePage> {
                       onChanged: controller.setEventMaxScore,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.score,
+                          color: Utils.greyDark,
+                          size: 25,
+                        ),
                         border: OutlineInputBorder(
                           borderSide:
                               BorderSide(width: 1, color: Utils.primaryColor),

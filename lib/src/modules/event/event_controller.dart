@@ -95,6 +95,7 @@ abstract class _EventControllerBase with Store {
 
   @action
   Future<bool> createEvent() async {
+    isLoading = true;
     final response = await repository.createEvent(
       eventName: eventName,
       eventDate: eventDate,
@@ -104,6 +105,7 @@ abstract class _EventControllerBase with Store {
     );
 
     if (response.isNotEmpty) {
+      isLoading = false;
       view.backToTheEvents();
     }
     return false;
@@ -113,6 +115,35 @@ abstract class _EventControllerBase with Store {
   Future<void> getEvents() async {
     isLoading = true;
     events = await repository.getEvents();
+    isLoading = false;
+  }
+
+  @action
+  Future<bool> editEvents({required String id}) async {
+    isLoading = true;
+    final response = await repository.editEvent(
+      id: id,
+      eventName: eventName,
+      eventDate: eventDate,
+      finalEventDate: finalEventDate,
+      eventMaxScore: int.parse(eventMaxScore),
+      visible: visible,
+    );
+
+    if (response.isNotEmpty) {
+      isLoading = false;
+      view.backToTheEvents();
+    }
+    return false;
+  }
+
+  @action
+  removeEvent(String id) async {
+    isLoading = true;
+    final response = await repository.removeEvent(eventID: id);
+    if (response) {
+      await getEvents();
+    }
     isLoading = false;
   }
 }

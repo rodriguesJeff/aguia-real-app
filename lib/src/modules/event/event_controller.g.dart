@@ -218,6 +218,22 @@ mixin _$EventController on _EventControllerBase, Store {
     return _$getEventsAsyncAction.run(() => super.getEvents());
   }
 
+  final _$editEventsAsyncAction =
+      AsyncAction('_EventControllerBase.editEvents');
+
+  @override
+  Future<bool> editEvents({required String id}) {
+    return _$editEventsAsyncAction.run(() => super.editEvents(id: id));
+  }
+
+  final _$removeEventAsyncAction =
+      AsyncAction('_EventControllerBase.removeEvent');
+
+  @override
+  Future removeEvent(String id) {
+    return _$removeEventAsyncAction.run(() => super.removeEvent(id));
+  }
+
   final _$_EventControllerBaseActionController =
       ActionController(name: '_EventControllerBase');
 
@@ -271,6 +287,17 @@ mixin _$EventController on _EventControllerBase, Store {
         name: '_EventControllerBase.setEventMaxScore');
     try {
       return super.setEventMaxScore(value);
+    } finally {
+      _$_EventControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEvents(List<ParseObject> value) {
+    final _$actionInfo = _$_EventControllerBaseActionController.startAction(
+        name: '_EventControllerBase.setEvents');
+    try {
+      return super.setEvents(value);
     } finally {
       _$_EventControllerBaseActionController.endAction(_$actionInfo);
     }

@@ -6,6 +6,7 @@ Widget eventWidget({
   required DateTime eventDate,
   required DateTime finalEventDate,
   required num eventMaxScore,
+  required Function() onRemove,
 }) {
   return Container(
     margin: const EdgeInsets.only(bottom: 16),
@@ -34,12 +35,24 @@ Widget eventWidget({
             Text('Pontuação máxima: ${eventMaxScore.toString()}'),
           ],
         ),
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            Icons.arrow_forward,
-          ),
-          color: Utils.greyDark,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                Icons.edit,
+              ),
+              color: Utils.greyDark,
+            ),
+            IconButton(
+              onPressed: onRemove,
+              icon: const Icon(
+                Icons.delete,
+              ),
+              color: Utils.greyDark,
+            ),
+          ],
         ),
       ],
     ),
