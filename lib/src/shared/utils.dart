@@ -8,4 +8,8 @@ class Utils {
   static Color greyMid = const Color(0xff888888);
   static Color greyDark = const Color(0xff666666);
   static Color greenAction = const Color(0xff4CAF50);
+
+  static const keyApplicationId = 'jXdxnm1PMnbOruQtYJ32P1GIKrsmx21pHb0l5VUz';
+  static const keyClientKey = 'bEKZ5qDzNpmXwYijfMrCgjbgoof10PAFTI5Y6Ojy';
+  static const keyParseServerUrl = 'https://parseapi.back4app.com';
 }

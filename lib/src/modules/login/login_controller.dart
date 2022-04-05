@@ -1,46 +1,64 @@
 import 'package:aguia_real_dbv/src/modules/login/login_repository.dart';
-import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:aguia_real_dbv/src/views/login_view.dart';
+import 'package:mobx/mobx.dart';
+part 'login_controller.g.dart';
 
-class LoginController  extends GetxController {
-  final LoginRepository repository;
+class LoginController = _LoginControllerBase with _$LoginController;
 
-  LoginController({required this.repository});
+abstract class _LoginControllerBase with Store {
+  _LoginControllerBase(this.view);
 
+  final LoginView view;
+
+  @observable
+  LoginRepository repository = LoginRepository();
+
+  @observable
   String username = "";
+  String password = "";
+  bool isLoading = false;
+
+  @action
   void setUsername(String value) => username = value;
+
+  @computed
   bool get isUserNameValid {
     if (username.isNotEmpty) return true;
     if (username.length > 5) return true;
     return false;
   }
+
+  @computed
   String? get usernameMessage {
     if (isUserNameValid) return null;
     return 'USernamve inválido';
   }
 
-  String password = "";
+  @action
   void setPassword(String value) => password = value;
+
+  @computed
   bool get isPasswordValid {
     if (password.isNotEmpty) return true;
     if (password.length > 8) return true;
     return false;
   }
+
+  @computed
   String? get passwordMessage {
     if (isPasswordValid) return null;
     return 'Senha inválida';
   }
 
+  @computed
   get isFormValid => isUserNameValid && isPasswordValid ? login() : null;
 
-  bool isLoading = false;
-
+  @action
   Future<void> login() async {
     isLoading = true;
     final response = await repository.login(username, password);
-
     if (response.success) {
-      print(response.result);
+      view.navToHomePage();
     }
-    print(response.statusCode);
   }
 }
