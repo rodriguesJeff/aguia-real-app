@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     controller = HomeController();
-    controller.getCurrentUser();
+    controller.initApp();
     super.initState();
   }
 
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                         ],
                       ),
                       Icon(
-                        Icons.chat,
+                        Icons.person,
                         color: Utils.greyLight,
                         size: 40,
                       ),
@@ -81,16 +81,12 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 15.0),
                   Container(
                     alignment: Alignment.topLeft,
-                    child: const Text('Bem Vindo!',
-                        style: TextStyle(fontSize: 25.0, color: Colors.white)),
+                    child: const Text(
+                      'Bem Vindo!',
+                      style: TextStyle(fontSize: 25.0, color: Colors.white),
+                    ),
                   ),
                   const SizedBox(height: 15.0),
-                  Container(
-                    alignment: Alignment.topLeft,
-                    child: const Text('Cursos!',
-                        style: TextStyle(fontSize: 20.0, color: Colors.white)),
-                  ),
-                  const SizedBox(height: 10.0),
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
@@ -98,55 +94,16 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: ExpansionTile(
                       key: expansionTile,
-                      title: const Text('Selecione'),
+                      title: const Text('Unidades'),
                       backgroundColor: Colors.white,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.only(left: 15.0),
-                          alignment: Alignment.topLeft,
-                          child: const Text('Hard Skills',
-                              style: TextStyle(fontSize: 20.0)),
-                        ),
-                        const ListTile(
-                          title: Text('Empreendedorismo e gestão de negócios',
-                              style: TextStyle(fontSize: 15.0)),
-                        ),
-                        const ListTile(
-                          title: Text('Comunicação e Web Design',
-                              style: TextStyle(fontSize: 15.0)),
-                        ),
-                        const ListTile(
-                          title: Text('Automação industrial',
-                              style: TextStyle(fontSize: 15.0)),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(left: 15.0),
-                          alignment: Alignment.topLeft,
-                          child: const Text('Soft Skills',
-                              style: TextStyle(fontSize: 20.0)),
-                        ),
-                        const ListTile(
-                          title: Text('Liderança',
-                              style: TextStyle(fontSize: 15.0)),
-                        ),
-                        const ListTile(
-                          title: Text('Inteligência emocial',
-                              style: TextStyle(fontSize: 15.0)),
-                        ),
-                        const ListTile(
-                          title: Text('Criatividade e resolução de problemas',
-                              style: TextStyle(fontSize: 15.0)),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(left: 15.0),
-                          alignment: Alignment.topLeft,
-                          child: const Text('Sessões de brainstorming',
-                              style: TextStyle(fontSize: 20.0)),
-                        ),
-                        const ListTile(
-                          title: Text('Assistir vídeos',
-                              style: TextStyle(fontSize: 15.0)),
-                        ),
+                        for (var unity in controller.unityes)
+                          ListTile(
+                            title: Text(
+                              unity['name'],
+                              style: const TextStyle(fontSize: 15.0),
+                            ),
+                          ),
                       ],
                     ),
                   ),
