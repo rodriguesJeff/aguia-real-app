@@ -62,6 +62,27 @@ mixin _$HomeController on _HomeControllerBase, Store {
     return _$getCurrentUserAsyncAction.run(() => super.getCurrentUser());
   }
 
+  final _$getUnityesAsyncAction = AsyncAction('_HomeControllerBase.getUnityes');
+
+  @override
+  Future<void> getUnityes() {
+    return _$getUnityesAsyncAction.run(() => super.getUnityes());
+  }
+
+  final _$_HomeControllerBaseActionController =
+      ActionController(name: '_HomeControllerBase');
+
+  @override
+  void initApp() {
+    final _$actionInfo = _$_HomeControllerBaseActionController.startAction(
+        name: '_HomeControllerBase.initApp');
+    try {
+      return super.initApp();
+    } finally {
+      _$_HomeControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

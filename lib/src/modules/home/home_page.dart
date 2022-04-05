@@ -1,4 +1,6 @@
+import 'package:aguia_real_dbv/src/modules/event/event_page.dart';
 import 'package:aguia_real_dbv/src/modules/home/home_controller.dart';
+import 'package:aguia_real_dbv/src/modules/home/widgets/item_shortcut.dart';
 import 'package:aguia_real_dbv/src/shared/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -32,7 +34,9 @@ class _HomePageState extends State<HomePage> {
           builder: (_) {
             if (controller.isLoading) {
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(
+                  color: Colors.white,
+                ),
               );
             } else {
               return Column(
@@ -115,8 +119,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const SizedBox(height: 10.0),
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    height: 100.0,
+                    padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(15.0),
@@ -124,37 +127,42 @@ class _HomePageState extends State<HomePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.description,
-                                size: 40.0, color: Utils.greyDark),
-                            const Text('Notas'),
-                          ],
+                        InkWell(
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const EventPage(),
+                            ),
+                          ),
+                          child: itemShortCut(Icons.event_note, 'Eventos'),
                         ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.event_note,
-                                size: 40.0, color: Utils.greyDark),
-                            const Text('Calendário'),
-                          ],
+                        InkWell(
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const EventPage(),
+                            ),
+                          ),
+                          child: itemShortCut(Icons.description, 'Relatórios'),
                         ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.perm_contact_calendar,
-                                size: 40.0, color: Utils.greyDark),
-                            const Text('Carteirinha'),
-                          ],
+                        InkWell(
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const EventPage(),
+                            ),
+                          ),
+                          child: itemShortCut(
+                              Icons.perm_contact_calendar, 'Informações'),
                         ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.menu_book,
-                                size: 40.0, color: Utils.greyDark),
-                            const Text('Notas'),
-                          ],
+                        InkWell(
+                          onTap: () => Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const EventPage(),
+                            ),
+                          ),
+                          child: itemShortCut(Icons.group, 'Meu Clube'),
                         ),
                       ],
                     ),
@@ -162,54 +170,45 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 15.0),
                   Container(
                     alignment: Alignment.topLeft,
-                    child: const Text('Meus compromissos!',
-                        style: TextStyle(fontSize: 20.0, color: Colors.white)),
+                    child: const Text(
+                      'Caixa do clube',
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    ),
                   ),
                   const SizedBox(height: 10.0),
                   Container(
-                    width: MediaQuery.of(context).size.width * 0.9,
-                    height: 110.0,
+                    alignment: Alignment.topLeft,
+                    padding: const EdgeInsets.all(8),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(15.0),
                     ),
-                    child: Column(
-                      children: [
-                        Container(
-                          alignment: Alignment.topRight,
-                          child: Text('Hoje 15/01/2021',
-                              style: TextStyle(
-                                  color: Utils.greyDark, fontSize: 10.0)),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.all(15.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: const [
-                              Icon(Icons.event_busy, size: 25.0),
-                              SizedBox(width: 10.0),
-                              Text('Sem compromissos para hoje!'),
-                            ],
+                    child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'R\$ 1200,00',
+                            style: TextStyle(
+                                fontSize: 20.0, color: Utils.greyDark),
                           ),
-                        ),
-                        Divider(height: 6, color: Utils.greyDark),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
-                            SizedBox(height: 20.0),
-                            Text('Palestra - Empatia'),
-                            SizedBox(width: 20.0),
-                            Text('02/03/2021'),
-                          ],
-                        ),
-                      ],
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(
+                              Icons.remove_red_eye,
+                              color: Utils.greyDark,
+                            ),
+                          ),
+                        ]),
+                  ),
+                  const SizedBox(height: 15.0),
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: const Text(
+                      'Ranking das unidades',
+                      style: TextStyle(fontSize: 20.0, color: Colors.white),
                     ),
                   ),
-                  const SizedBox(height: 20.0),
-                  // Image(
-                  //   width: MediaQuery.of(context).size.width * 0.7,
-                  //   image: AssetImage(banner),
-                  // ),
+                  const SizedBox(height: 10.0),
                 ],
               );
             }

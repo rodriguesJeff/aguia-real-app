@@ -44,12 +44,14 @@ class _LoginPageState extends State<LoginPage> implements LoginView {
                         Text(
                           'LOGIN',
                           style: TextStyle(
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.bold,
-                              color: Utils.darkBlue),
+                            fontSize: 20.0,
+                            fontWeight: FontWeight.bold,
+                            color: Utils.darkBlue,
+                          ),
                         ),
                         const SizedBox(height: 10.0),
                         TextFormField(
+                          initialValue: controller.username,
                           onChanged: controller.setUsername,
                           decoration: InputDecoration(
                             prefixIcon: Padding(
