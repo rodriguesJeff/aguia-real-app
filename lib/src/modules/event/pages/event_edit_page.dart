@@ -1,25 +1,35 @@
 import 'package:aguia_real_dbv/src/modules/event/event_controller.dart';
 import 'package:aguia_real_dbv/src/shared/utils.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:provider/provider.dart';
 
-class EventCreatePage extends StatefulWidget {
-  const EventCreatePage({Key? key}) : super(key: key);
+class EventEditPage extends StatefulWidget {
+  const EventEditPage({Key? key, required this.event}) : super(key: key);
+
+  final ParseObject event;
 
   @override
-  State<EventCreatePage> createState() => _EventCreatePageState();
+  State<EventEditPage> createState() => _EventEditPageState();
 }
 
-class _EventCreatePageState extends State<EventCreatePage> {
+class _EventEditPageState extends State<EventEditPage> {
   @override
   Widget build(BuildContext context) {
+    final ParseObject event = widget.event;
     final controller = context.watch<EventController>();
+
+    setState(() {
+      controller.setFinalEventDate(event['finalDate']);
+      controller.setEventDate(event['date']);
+    });
 
     Future<void> _selectDate(context) async {
       final DateTime? picked = await showDatePicker(
           context: context,
-          initialDate: controller.eventDate,
+          initialDate: event['date'],
           firstDate: DateTime.now(),
           lastDate: DateTime(2101));
       if (picked != null && picked != controller.eventDate) {
@@ -30,10 +40,10 @@ class _EventCreatePageState extends State<EventCreatePage> {
     Future<void> _selectFinalDate(context) async {
       final DateTime? picked = await showDatePicker(
           context: context,
-          initialDate: controller.eventDate,
-          firstDate: controller.eventDate,
+          initialDate: event['finalDate'],
+          firstDate: event['date'],
           lastDate: DateTime(2101));
-      if (picked != null && picked != controller.eventDate) {
+      if (picked != null) {
         controller.setFinalEventDate(picked);
       }
     }
@@ -49,7 +59,7 @@ class _EventCreatePageState extends State<EventCreatePage> {
         child: Align(
           alignment: Alignment.center,
           child: Container(
-            height: MediaQuery.of(context).size.height,
+            height: MediaQuery.of(context).size.height / 1.5,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -62,7 +72,7 @@ class _EventCreatePageState extends State<EventCreatePage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
-                      'CADASTRO DE EVENTO',
+                      'ATUALIZAR EVENTO',
                       style: TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
@@ -75,7 +85,7 @@ class _EventCreatePageState extends State<EventCreatePage> {
                       style: TextStyle(color: Utils.darkBlue, fontSize: 15.0),
                     ),
                     TextFormField(
-                      initialValue: controller.eventName,
+                      initialValue: event['name'],
                       onChanged: controller.setEventName,
                       decoration: InputDecoration(
                         prefixIcon: Icon(
@@ -90,10 +100,21 @@ class _EventCreatePageState extends State<EventCreatePage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 5.0),
-                    Text(
-                      'Data de início',
-                      style: TextStyle(color: Utils.darkBlue, fontSize: 15.0),
+                    const SizedBox(height: 15.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Data de início',
+                          style:
+                              TextStyle(color: Utils.darkBlue, fontSize: 15.0),
+                        ),
+                        Text(
+                          'Data anterior: ${event['date'].day}/${event['date'].month}/${event['date'].year}',
+                          style:
+                              TextStyle(color: Utils.darkBlue, fontSize: 15.0),
+                        ),
+                      ],
                     ),
                     InkWell(
                       onTap: () => _selectDate(c),
@@ -106,7 +127,8 @@ class _EventCreatePageState extends State<EventCreatePage> {
                             size: 25,
                           ),
                           label: Text(
-                              '${controller.eventDate.day}/${controller.eventDate.month}/${controller.eventDate.year}'),
+                            '${controller.eventDate.day}/${controller.eventDate.month}/${controller.eventDate.year}',
+                          ),
                           border: OutlineInputBorder(
                             borderSide:
                                 BorderSide(width: 1, color: Utils.primaryColor),
@@ -115,10 +137,21 @@ class _EventCreatePageState extends State<EventCreatePage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 5.0),
-                    Text(
-                      'Data de término',
-                      style: TextStyle(color: Utils.darkBlue, fontSize: 15.0),
+                    const SizedBox(height: 15.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Data de término',
+                          style:
+                              TextStyle(color: Utils.darkBlue, fontSize: 15.0),
+                        ),
+                        Text(
+                          'Data anterior: ${event['finalDate'].day}/${event['finalDate'].month}/${event['finalDate'].year}',
+                          style:
+                              TextStyle(color: Utils.darkBlue, fontSize: 15.0),
+                        ),
+                      ],
                     ),
                     InkWell(
                       onTap: () => _selectFinalDate(c),
@@ -131,7 +164,8 @@ class _EventCreatePageState extends State<EventCreatePage> {
                             size: 25,
                           ),
                           label: Text(
-                              '${controller.finalEventDate.day}/${controller.finalEventDate.month}/${controller.finalEventDate.year}'),
+                            '${controller.finalEventDate.day}/${controller.finalEventDate.month}/${controller.finalEventDate.year}',
+                          ),
                           border: OutlineInputBorder(
                             borderSide:
                                 BorderSide(width: 1, color: Utils.primaryColor),
@@ -142,11 +176,11 @@ class _EventCreatePageState extends State<EventCreatePage> {
                     ),
                     const SizedBox(height: 5.0),
                     Text(
-                      'Pontuação máxima',
+                      'Pontuação para 5 estrelas',
                       style: TextStyle(color: Utils.darkBlue, fontSize: 15.0),
                     ),
                     TextFormField(
-                      initialValue: controller.eventMaxScore.toString(),
+                      initialValue: event['maxScore'].toString(),
                       onChanged: controller.setEventMaxScore,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
@@ -165,7 +199,7 @@ class _EventCreatePageState extends State<EventCreatePage> {
                     const SizedBox(height: 10.0),
                     ElevatedButton(
                       onPressed: () {
-                        controller.createEvent();
+                        controller.editEvent(id: event['objectId']);
                       },
                       style: ElevatedButton.styleFrom(
                         primary: Utils.greenAction,
@@ -175,12 +209,17 @@ class _EventCreatePageState extends State<EventCreatePage> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
-                        child: const Center(
-                          child: Text(
-                            'CADASTRAR',
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 20.0),
-                          ),
+                        child: Center(
+                          child: controller.isLoading
+                              ? LoadingAnimationWidget.inkDrop(
+                                  color: Colors.white,
+                                  size: 20,
+                                )
+                              : const Text(
+                                  'ATUALIZAR',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20.0),
+                                ),
                         ),
                       ),
                     ),

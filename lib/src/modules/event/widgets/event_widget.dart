@@ -7,6 +7,7 @@ Widget eventWidget({
   required DateTime finalEventDate,
   required num eventMaxScore,
   required Function() onRemove,
+  required Function() onEdit,
 }) {
   return Container(
     margin: const EdgeInsets.only(bottom: 16),
@@ -19,9 +20,9 @@ Widget eventWidget({
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Image.asset(
-          'images/camping.png',
-          width: 150,
-          height: 100,
+          'assets/images/camping.png',
+          width: 100,
+          height: 75,
         ),
         Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,7 +40,7 @@ Widget eventWidget({
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             IconButton(
-              onPressed: () {},
+              onPressed: onEdit,
               icon: const Icon(
                 Icons.edit,
               ),

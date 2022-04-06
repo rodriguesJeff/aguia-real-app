@@ -1,8 +1,5 @@
-import 'dart:io';
-
 import 'package:aguia_real_dbv/src/modules/event/event_repository.dart';
 import 'package:aguia_real_dbv/src/views/event_view.dart';
-import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 part 'event_controller.g.dart';
@@ -36,12 +33,6 @@ abstract class _EventControllerBase with Store {
   String eventMaxScore = '';
 
   @observable
-  ParseFileBase? parseFile;
-
-  @observable
-  File? pickedFile;
-
-  @observable
   bool visible = true;
 
   @action
@@ -68,30 +59,11 @@ abstract class _EventControllerBase with Store {
   @computed
   bool get isEventMaxScoreValid => int.parse(eventMaxScore) > 0;
 
-  @computed
-  get submitForm => isEventNameValid && isEventDateValid && isEventMaxScoreValid
-      ? createEvent
-      : null;
-
   @observable
   List<ParseObject> events = [];
 
   @action
   void setEvents(List<ParseObject> value) => events = value;
-
-  @action
-  Future<ParseFileBase?> getImage() async {
-    if (kIsWeb) {
-      parseFile = ParseWebFile(
-        await pickedFile!.readAsBytes(),
-        name: 'acampLogo.jpg',
-      );
-      return parseFile;
-    } else {
-      parseFile = ParseFile(File(pickedFile!.path));
-      return parseFile;
-    }
-  }
 
   @action
   Future<bool> createEvent() async {
@@ -118,8 +90,21 @@ abstract class _EventControllerBase with Store {
     isLoading = false;
   }
 
+  @observable
+  ParseObject? event;
+
   @action
-  Future<bool> editEvents({required String id}) async {
+  Future<void> getSpecificEvent(String eventID) async {
+    isLoading = true;
+    event = await repository.getSpecificEvent(eventID);
+    if (event != null) {
+      view.goToEditEvent(event!);
+    }
+    isLoading = false;
+  }
+
+  @action
+  Future<void> editEvent({required String id}) async {
     isLoading = true;
     final response = await repository.editEvent(
       id: id,
@@ -130,11 +115,10 @@ abstract class _EventControllerBase with Store {
       visible: visible,
     );
 
-    if (response.isNotEmpty) {
-      isLoading = false;
+    if (response) {
+      await getEvents();
       view.backToTheEvents();
     }
-    return false;
   }
 
   @action

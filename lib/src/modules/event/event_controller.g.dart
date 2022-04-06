@@ -37,13 +37,6 @@ mixin _$EventController on _EventControllerBase, Store {
           Computed<bool>(() => super.isEventMaxScoreValid,
               name: '_EventControllerBase.isEventMaxScoreValid'))
       .value;
-  Computed<dynamic>? _$submitFormComputed;
-
-  @override
-  dynamic get submitForm =>
-      (_$submitFormComputed ??= Computed<dynamic>(() => super.submitForm,
-              name: '_EventControllerBase.submitForm'))
-          .value;
 
   final _$isLoadingAtom = Atom(name: '_EventControllerBase.isLoading');
 
@@ -136,36 +129,6 @@ mixin _$EventController on _EventControllerBase, Store {
     });
   }
 
-  final _$parseFileAtom = Atom(name: '_EventControllerBase.parseFile');
-
-  @override
-  ParseFileBase? get parseFile {
-    _$parseFileAtom.reportRead();
-    return super.parseFile;
-  }
-
-  @override
-  set parseFile(ParseFileBase? value) {
-    _$parseFileAtom.reportWrite(value, super.parseFile, () {
-      super.parseFile = value;
-    });
-  }
-
-  final _$pickedFileAtom = Atom(name: '_EventControllerBase.pickedFile');
-
-  @override
-  File? get pickedFile {
-    _$pickedFileAtom.reportRead();
-    return super.pickedFile;
-  }
-
-  @override
-  set pickedFile(File? value) {
-    _$pickedFileAtom.reportWrite(value, super.pickedFile, () {
-      super.pickedFile = value;
-    });
-  }
-
   final _$visibleAtom = Atom(name: '_EventControllerBase.visible');
 
   @override
@@ -196,11 +159,19 @@ mixin _$EventController on _EventControllerBase, Store {
     });
   }
 
-  final _$getImageAsyncAction = AsyncAction('_EventControllerBase.getImage');
+  final _$eventAtom = Atom(name: '_EventControllerBase.event');
 
   @override
-  Future<ParseFileBase?> getImage() {
-    return _$getImageAsyncAction.run(() => super.getImage());
+  ParseObject? get event {
+    _$eventAtom.reportRead();
+    return super.event;
+  }
+
+  @override
+  set event(ParseObject? value) {
+    _$eventAtom.reportWrite(value, super.event, () {
+      super.event = value;
+    });
   }
 
   final _$createEventAsyncAction =
@@ -218,12 +189,20 @@ mixin _$EventController on _EventControllerBase, Store {
     return _$getEventsAsyncAction.run(() => super.getEvents());
   }
 
-  final _$editEventsAsyncAction =
-      AsyncAction('_EventControllerBase.editEvents');
+  final _$getSpecificEventAsyncAction =
+      AsyncAction('_EventControllerBase.getSpecificEvent');
 
   @override
-  Future<bool> editEvents({required String id}) {
-    return _$editEventsAsyncAction.run(() => super.editEvents(id: id));
+  Future<void> getSpecificEvent(String eventID) {
+    return _$getSpecificEventAsyncAction
+        .run(() => super.getSpecificEvent(eventID));
+  }
+
+  final _$editEventAsyncAction = AsyncAction('_EventControllerBase.editEvent');
+
+  @override
+  Future<void> editEvent({required String id}) {
+    return _$editEventAsyncAction.run(() => super.editEvent(id: id));
   }
 
   final _$removeEventAsyncAction =
@@ -312,15 +291,13 @@ eventName: ${eventName},
 eventDate: ${eventDate},
 finalEventDate: ${finalEventDate},
 eventMaxScore: ${eventMaxScore},
-parseFile: ${parseFile},
-pickedFile: ${pickedFile},
 visible: ${visible},
 events: ${events},
+event: ${event},
 isEventNameValid: ${isEventNameValid},
 isEventDateValid: ${isEventDateValid},
 isFinalEventDateValid: ${isFinalEventDateValid},
-isEventMaxScoreValid: ${isEventMaxScoreValid},
-submitForm: ${submitForm}
+isEventMaxScoreValid: ${isEventMaxScoreValid}
     ''';
   }
 }

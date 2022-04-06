@@ -28,7 +28,7 @@ class EventRepository {
     return [];
   }
 
-  Future<List<ParseObject>> editEvent({
+  Future<bool> editEvent({
     required String id,
     required String eventName,
     required DateTime eventDate,
@@ -48,12 +48,12 @@ class EventRepository {
       final ParseResponse response = await event.save();
 
       if (response.success) {
-        return getEvents();
+        return true;
       }
     } catch (e) {
       debugPrint('$e');
     }
-    return [];
+    return false;
   }
 
   Future<bool> removeEvent({
@@ -80,5 +80,19 @@ class EventRepository {
       debugPrint('$e');
     }
     return [];
+  }
+
+  Future<ParseObject?> getSpecificEvent(String eventID) async {
+    try {
+      final ParseResponse response =
+          await ParseObject('Event').getObject(eventID);
+
+      if (response.success && response.results != null) {
+        return response.result;
+      }
+    } catch (e) {
+      debugPrint('$e');
+    }
+    return null;
   }
 }

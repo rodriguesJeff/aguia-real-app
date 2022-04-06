@@ -1,9 +1,11 @@
 import 'package:aguia_real_dbv/src/modules/event/event_controller.dart';
 import 'package:aguia_real_dbv/src/modules/event/pages/event_create_page.dart';
+import 'package:aguia_real_dbv/src/modules/event/pages/event_edit_page.dart';
 import 'package:aguia_real_dbv/src/modules/event/widgets/event_widget.dart';
 import 'package:aguia_real_dbv/src/shared/utils.dart';
 import 'package:aguia_real_dbv/src/views/event_view.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -67,6 +69,7 @@ class _EventPageState extends State<EventPage> implements EventView {
                       finalEventDate: e['finalDate'],
                       eventMaxScore: e['maxScore'],
                       onRemove: () => controller.removeEvent(e['objectId']),
+                      onEdit: () => controller.getSpecificEvent(e['objectId']),
                     ),
                 ],
               ),
@@ -81,5 +84,18 @@ class _EventPageState extends State<EventPage> implements EventView {
   void backToTheEvents() {
     controller.getEvents();
     Navigator.pop(context);
+  }
+
+  @override
+  void goToEditEvent(ParseObject event) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (c) {
+        return Provider.value(
+          value: EventController(this),
+          child: EventEditPage(event: event),
+        );
+      }),
+    );
   }
 }
