@@ -1,6 +1,7 @@
 import 'package:aguia_real_dbv/src/modules/event/event_controller.dart';
 import 'package:aguia_real_dbv/src/shared/utils.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -175,12 +176,17 @@ class _EventCreatePageState extends State<EventCreatePage> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.0),
                         ),
-                        child: const Center(
-                          child: Text(
-                            'CADASTRAR',
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 20.0),
-                          ),
+                        child: Center(
+                          child: controller.isLoading
+                              ? LoadingAnimationWidget.inkDrop(
+                                  color: Colors.white,
+                                  size: 20,
+                                )
+                              : const Text(
+                                  'CADASTRAR',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20.0),
+                                ),
                         ),
                       ),
                     ),

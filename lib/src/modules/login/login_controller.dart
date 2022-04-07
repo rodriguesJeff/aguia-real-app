@@ -56,8 +56,10 @@ abstract class _LoginControllerBase with Store {
   @action
   Future<void> login() async {
     isLoading = true;
+    Future.delayed(const Duration(seconds: 1));
     final response = await repository.login(username, password);
     if (response.success) {
+      isLoading = false;
       view.navToHomePage();
     }
   }
