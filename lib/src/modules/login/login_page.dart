@@ -1,5 +1,6 @@
 import 'package:aguia_real_dbv/src/modules/home/home_page.dart';
 import 'package:aguia_real_dbv/src/modules/login/login_controller.dart';
+import 'package:aguia_real_dbv/src/modules/ranking/unity_ranking_page.dart';
 import 'package:aguia_real_dbv/src/shared/utils.dart';
 import 'package:aguia_real_dbv/src/views/login_view.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -128,7 +129,12 @@ class _LoginPageState extends State<LoginPage> implements LoginView {
                       Divider(height: 6, color: Utils.greyDark),
                       const SizedBox(height: 10.0),
                       GestureDetector(
-                        onTap: () {},
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => const UnityRankingPage(),
+                          ),
+                        ),
                         child: Container(
                           width: 300.0,
                           height: 55.0,
@@ -141,7 +147,7 @@ class _LoginPageState extends State<LoginPage> implements LoginView {
                           ),
                           child: Center(
                             child: Text(
-                              'CADASTRAR',
+                              'ACOMPANHAR PONTUAÇÃO',
                               style: TextStyle(
                                 color: Utils.darkBlue,
                                 fontSize: 20.0,
