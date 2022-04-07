@@ -144,6 +144,21 @@ mixin _$EventController on _EventControllerBase, Store {
     });
   }
 
+  final _$showErrorsAtom = Atom(name: '_EventControllerBase.showErrors');
+
+  @override
+  bool get showErrors {
+    _$showErrorsAtom.reportRead();
+    return super.showErrors;
+  }
+
+  @override
+  set showErrors(bool value) {
+    _$showErrorsAtom.reportWrite(value, super.showErrors, () {
+      super.showErrors = value;
+    });
+  }
+
   final _$eventsAtom = Atom(name: '_EventControllerBase.events');
 
   @override
@@ -228,6 +243,17 @@ mixin _$EventController on _EventControllerBase, Store {
   }
 
   @override
+  void setShowErrors() {
+    final _$actionInfo = _$_EventControllerBaseActionController.startAction(
+        name: '_EventControllerBase.setShowErrors');
+    try {
+      return super.setShowErrors();
+    } finally {
+      _$_EventControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void setEventName(String value) {
     final _$actionInfo = _$_EventControllerBaseActionController.startAction(
         name: '_EventControllerBase.setEventName');
@@ -283,6 +309,17 @@ mixin _$EventController on _EventControllerBase, Store {
   }
 
   @override
+  void submitEditForm(String id) {
+    final _$actionInfo = _$_EventControllerBaseActionController.startAction(
+        name: '_EventControllerBase.submitEditForm');
+    try {
+      return super.submitEditForm(id);
+    } finally {
+      _$_EventControllerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 isLoading: ${isLoading},
@@ -292,6 +329,7 @@ eventDate: ${eventDate},
 finalEventDate: ${finalEventDate},
 eventMaxScore: ${eventMaxScore},
 visible: ${visible},
+showErrors: ${showErrors},
 events: ${events},
 event: ${event},
 isEventNameValid: ${isEventNameValid},

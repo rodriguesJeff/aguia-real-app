@@ -80,14 +80,26 @@ class _EventEditPageState extends State<EventEditPage> {
                       ),
                     ),
                     const SizedBox(height: 10.0),
-                    Text(
-                      'Nome do evento',
-                      style: TextStyle(color: Utils.darkBlue, fontSize: 15.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Nome do evento',
+                          style:
+                              TextStyle(color: Utils.darkBlue, fontSize: 15.0),
+                        ),
+                        Text(
+                          'Nome anterior: ${event['name']}',
+                          style:
+                              TextStyle(color: Utils.darkBlue, fontSize: 15.0),
+                        ),
+                      ],
                     ),
                     TextFormField(
-                      initialValue: event['name'],
+                      initialValue: controller.eventName,
                       onChanged: controller.setEventName,
                       decoration: InputDecoration(
+                        hintText: event['name'],
                         prefixIcon: Icon(
                           Icons.description,
                           color: Utils.greyDark,
@@ -174,16 +186,28 @@ class _EventEditPageState extends State<EventEditPage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 5.0),
-                    Text(
-                      'Pontuação para 5 estrelas',
-                      style: TextStyle(color: Utils.darkBlue, fontSize: 15.0),
+                    const SizedBox(height: 15.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Pontuação para 5 estrelas',
+                          style:
+                              TextStyle(color: Utils.darkBlue, fontSize: 15.0),
+                        ),
+                        Text(
+                          'Máx. pontuação anterior ${event['maxScore']}',
+                          style:
+                              TextStyle(color: Utils.darkBlue, fontSize: 15.0),
+                        ),
+                      ],
                     ),
                     TextFormField(
-                      initialValue: event['maxScore'].toString(),
+                      initialValue: controller.eventMaxScore.toString(),
                       onChanged: controller.setEventMaxScore,
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(
+                        hintText: event['maxScore'].toString(),
                         prefixIcon: Icon(
                           Icons.score,
                           color: Utils.greyDark,
@@ -196,14 +220,13 @@ class _EventEditPageState extends State<EventEditPage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 10.0),
+                    const SizedBox(height: 25.0),
                     ElevatedButton(
                       onPressed: () {
-                        controller.editEvent(id: event['objectId']);
+                        controller.submitEditForm(event['objectId']);
                       },
-                      style: ElevatedButton.styleFrom(
-                        primary: Utils.greenAction,
-                      ),
+                      style:
+                          ElevatedButton.styleFrom(primary: Utils.greenAction),
                       child: Container(
                         padding: const EdgeInsets.all(10),
                         decoration: BoxDecoration(

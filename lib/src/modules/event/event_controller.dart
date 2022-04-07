@@ -35,6 +35,12 @@ abstract class _EventControllerBase with Store {
   @observable
   bool visible = true;
 
+  @observable
+  bool showErrors = false;
+
+  @action
+  void setShowErrors() => showErrors = true;
+
   @action
   void setEventName(String value) => eventName = value;
 
@@ -102,6 +108,9 @@ abstract class _EventControllerBase with Store {
     }
     isLoading = false;
   }
+
+  @action
+  void submitEditForm(String id) => editEvent(id: id);
 
   @action
   Future<void> editEvent({required String id}) async {

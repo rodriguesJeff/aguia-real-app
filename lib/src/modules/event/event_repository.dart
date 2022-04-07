@@ -36,7 +36,9 @@ class EventRepository {
     required num eventMaxScore,
     required bool visible,
   }) async {
+    print('CHEGOU AQUI');
     try {
+      print('OBJETO ID $id');
       var event = ParseObject('Event')
         ..objectId = id
         ..set('name', eventName)
@@ -51,6 +53,7 @@ class EventRepository {
         return true;
       }
     } catch (e) {
+      print('CAIU NUM ERRO');
       debugPrint('$e');
     }
     return false;
