@@ -1,4 +1,5 @@
 import 'package:aguia_real_dbv/src/shared/utils.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter/material.dart';
 
 class UnityRankingPage extends StatelessWidget {
@@ -20,6 +21,7 @@ class UnityRankingPage extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const SizedBox(height: 30.0),
               Container(
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
@@ -28,9 +30,48 @@ class UnityRankingPage extends StatelessWidget {
                 ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: const [
-                    CircleAvatar(
-                      backgroundColor: Colors.white,
+                  children: [
+                    const CircleAvatar(
+                      backgroundImage:
+                          AssetImage('images/unityes/unidade-aguia.jpeg'),
+                      radius: 30,
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Unidade Águia',
+                          style: TextStyle(
+                            color: Utils.greyMid,
+                            fontSize: 20,
+                          ),
+                        ),
+                        RatingBarIndicator(
+                          rating: 5,
+                          itemBuilder: (context, index) => const Icon(
+                            Icons.star,
+                            color: Colors.amber,
+                          ),
+                          itemCount: 5,
+                          itemSize: 20.0,
+                          direction: Axis.horizontal,
+                        ),
+                      ],
+                    ),
+                    const SizedBox.shrink(),
+                    const SizedBox.shrink(),
+                    const SizedBox.shrink(),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10.0),
+                      child: Text(
+                        '800\npts',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Utils.greyDark,
+                        ),
+                      ),
                     ),
                   ],
                 ),
