@@ -54,92 +54,58 @@ class _EventEditPageState extends State<EventEditPage> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Align(
-          alignment: Alignment.center,
-          child: Container(
-            height: MediaQuery.of(context).size.height / 1.5,
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Observer(
-              builder: (c) {
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      'ATUALIZAR EVENTO',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        fontWeight: FontWeight.bold,
-                        color: Utils.darkBlue,
-                      ),
-                    ),
-                    const SizedBox(height: 10.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Nome do evento',
-                          style:
-                              TextStyle(color: Utils.darkBlue, fontSize: 15.0),
-                        ),
-                        Text(
-                          'Nome anterior: ${event['name']}',
-                          style:
-                              TextStyle(color: Utils.darkBlue, fontSize: 15.0),
-                        ),
-                      ],
-                    ),
-                    TextFormField(
-                      initialValue: controller.eventName,
-                      onChanged: controller.setEventName,
-                      decoration: InputDecoration(
-                        hintText: event['name'],
-                        prefixIcon: Icon(
-                          Icons.description,
-                          color: Utils.greyDark,
-                          size: 25,
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1, color: Utils.primaryColor),
-                          borderRadius: BorderRadius.circular(15),
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Align(
+            alignment: Alignment.center,
+            child: Container(
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Observer(
+                builder: (c) {
+                  return Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        'ATUALIZAR EVENTO',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Utils.darkBlue,
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 15.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Data de início',
-                          style:
-                              TextStyle(color: Utils.darkBlue, fontSize: 15.0),
-                        ),
-                        Text(
-                          'Data anterior: ${event['date'].day}/${event['date'].month}/${event['date'].year}',
-                          style:
-                              TextStyle(color: Utils.darkBlue, fontSize: 15.0),
-                        ),
-                      ],
-                    ),
-                    InkWell(
-                      onTap: () => _selectDate(c),
-                      child: TextFormField(
-                        enabled: false,
+                      const SizedBox(height: 10.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              'Nome do evento',
+                              style: TextStyle(
+                                  color: Utils.darkBlue, fontSize: 15.0),
+                            ),
+                          ),
+                          Text(
+                            'anterior: ${event['name']}',
+                            style: TextStyle(
+                                color: Utils.darkBlue, fontSize: 15.0),
+                          ),
+                        ],
+                      ),
+                      TextFormField(
+                        initialValue: controller.eventName,
+                        onChanged: controller.setEventName,
                         decoration: InputDecoration(
+                          hintText: event['name'],
                           prefixIcon: Icon(
-                            Icons.date_range,
+                            Icons.description,
                             color: Utils.greyDark,
                             size: 25,
-                          ),
-                          label: Text(
-                            '${controller.eventDate.day}/${controller.eventDate.month}/${controller.eventDate.year}',
                           ),
                           border: OutlineInputBorder(
                             borderSide:
@@ -148,35 +114,115 @@ class _EventEditPageState extends State<EventEditPage> {
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 15.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Data de término',
-                          style:
-                              TextStyle(color: Utils.darkBlue, fontSize: 15.0),
+                      const SizedBox(height: 15.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Data de início',
+                            style: TextStyle(
+                                color: Utils.darkBlue, fontSize: 15.0),
+                          ),
+                          Flexible(
+                            child: Text(
+                              'anterior: ${event['date'].day}/${event['date'].month}/${event['date'].year}',
+                              style: TextStyle(
+                                  color: Utils.darkBlue, fontSize: 15.0),
+                            ),
+                          ),
+                        ],
+                      ),
+                      InkWell(
+                        onTap: () => _selectDate(c),
+                        child: TextFormField(
+                          enabled: false,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.date_range,
+                              color: Utils.greyDark,
+                              size: 25,
+                            ),
+                            label: Text(
+                              '${controller.eventDate.day}/${controller.eventDate.month}/${controller.eventDate.year}',
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: Utils.primaryColor),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
                         ),
-                        Text(
-                          'Data anterior: ${event['finalDate'].day}/${event['finalDate'].month}/${event['finalDate'].year}',
-                          style:
-                              TextStyle(color: Utils.darkBlue, fontSize: 15.0),
+                      ),
+                      const SizedBox(height: 15.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'Data de término',
+                            style: TextStyle(
+                                color: Utils.darkBlue, fontSize: 15.0),
+                          ),
+                          Flexible(
+                            child: Text(
+                              'anterior: ${event['finalDate'].day}/${event['finalDate'].month}/${event['finalDate'].year}',
+                              style: TextStyle(
+                                  color: Utils.darkBlue, fontSize: 15.0),
+                            ),
+                          ),
+                        ],
+                      ),
+                      InkWell(
+                        onTap: () => _selectFinalDate(c),
+                        child: TextFormField(
+                          enabled: false,
+                          decoration: InputDecoration(
+                            prefixIcon: Icon(
+                              Icons.date_range,
+                              color: Utils.greyDark,
+                              size: 25,
+                            ),
+                            label: Text(
+                              '${controller.finalEventDate.day}/${controller.finalEventDate.month}/${controller.finalEventDate.year}',
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  width: 1, color: Utils.primaryColor),
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                          ),
                         ),
-                      ],
-                    ),
-                    InkWell(
-                      onTap: () => _selectFinalDate(c),
-                      child: TextFormField(
-                        enabled: false,
+                      ),
+                      const SizedBox(height: 15.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                            child: Text(
+                              'Pontuação para 5 estrelas',
+                              style: TextStyle(
+                                  color: Utils.darkBlue, fontSize: 15.0),
+                            ),
+                          ),
+                          const SizedBox.shrink(),
+                          Flexible(
+                            child: Text(
+                              'Máx. pontuação anterior: ${event['maxScore']}',
+                              style: TextStyle(
+                                  color: Utils.darkBlue, fontSize: 15.0),
+                            ),
+                          ),
+                        ],
+                      ),
+                      TextFormField(
+                        initialValue: controller.eventMaxScore.toString(),
+                        onChanged: controller.setEventMaxScore,
+                        keyboardType: TextInputType.number,
                         decoration: InputDecoration(
+                          hintText: event['maxScore'].toString(),
                           prefixIcon: Icon(
-                            Icons.date_range,
+                            Icons.score,
                             color: Utils.greyDark,
                             size: 25,
-                          ),
-                          label: Text(
-                            '${controller.finalEventDate.day}/${controller.finalEventDate.month}/${controller.finalEventDate.year}',
                           ),
                           border: OutlineInputBorder(
                             borderSide:
@@ -185,70 +231,36 @@ class _EventEditPageState extends State<EventEditPage> {
                           ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 15.0),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Pontuação para 5 estrelas',
-                          style:
-                              TextStyle(color: Utils.darkBlue, fontSize: 15.0),
-                        ),
-                        Text(
-                          'Máx. pontuação anterior ${event['maxScore']}',
-                          style:
-                              TextStyle(color: Utils.darkBlue, fontSize: 15.0),
-                        ),
-                      ],
-                    ),
-                    TextFormField(
-                      initialValue: controller.eventMaxScore.toString(),
-                      onChanged: controller.setEventMaxScore,
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        hintText: event['maxScore'].toString(),
-                        prefixIcon: Icon(
-                          Icons.score,
-                          color: Utils.greyDark,
-                          size: 25,
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(width: 1, color: Utils.primaryColor),
-                          borderRadius: BorderRadius.circular(15),
+                      const SizedBox(height: 25.0),
+                      ElevatedButton(
+                        onPressed: () {
+                          controller.submitEditForm(event['objectId']);
+                        },
+                        style: ElevatedButton.styleFrom(
+                            primary: Utils.greenAction),
+                        child: Container(
+                          padding: const EdgeInsets.all(10),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.0),
+                          ),
+                          child: Center(
+                            child: controller.isLoading
+                                ? LoadingAnimationWidget.inkDrop(
+                                    color: Colors.white,
+                                    size: 20,
+                                  )
+                                : const Text(
+                                    'ATUALIZAR',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 20.0),
+                                  ),
+                          ),
                         ),
                       ),
-                    ),
-                    const SizedBox(height: 25.0),
-                    ElevatedButton(
-                      onPressed: () {
-                        controller.submitEditForm(event['objectId']);
-                      },
-                      style:
-                          ElevatedButton.styleFrom(primary: Utils.greenAction),
-                      child: Container(
-                        padding: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15.0),
-                        ),
-                        child: Center(
-                          child: controller.isLoading
-                              ? LoadingAnimationWidget.inkDrop(
-                                  color: Colors.white,
-                                  size: 20,
-                                )
-                              : const Text(
-                                  'ATUALIZAR',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 20.0),
-                                ),
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
+                    ],
+                  );
+                },
+              ),
             ),
           ),
         ),

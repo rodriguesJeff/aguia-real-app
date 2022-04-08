@@ -2,8 +2,8 @@ import 'package:aguia_real_dbv/src/shared/utils.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter/material.dart';
 
-class UnityRankingPage extends StatelessWidget {
-  const UnityRankingPage({Key? key}) : super(key: key);
+class ShowUnityRanking extends StatelessWidget {
+  const ShowUnityRanking({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +32,8 @@ class UnityRankingPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     const CircleAvatar(
-                      backgroundImage:
-                          AssetImage('images/unityes/unidade-aguia.jpeg'),
+                      backgroundImage: AssetImage(
+                          'assets/images/unityes/unidade-aguia.jpeg'),
                       radius: 30,
                     ),
                     Column(

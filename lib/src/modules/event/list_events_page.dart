@@ -2,6 +2,7 @@ import 'package:aguia_real_dbv/src/modules/event/event_controller.dart';
 import 'package:aguia_real_dbv/src/modules/event/pages/event_create_page.dart';
 import 'package:aguia_real_dbv/src/modules/event/pages/event_edit_page.dart';
 import 'package:aguia_real_dbv/src/modules/event/widgets/event_widget.dart';
+import 'package:aguia_real_dbv/src/shared/models/event.dart';
 import 'package:aguia_real_dbv/src/shared/utils.dart';
 import 'package:aguia_real_dbv/src/views/event_view.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -9,14 +10,14 @@ import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
-class EventPage extends StatefulWidget {
-  const EventPage({Key? key}) : super(key: key);
+class ListEventsPage extends StatefulWidget {
+  const ListEventsPage({Key? key}) : super(key: key);
 
   @override
-  State<EventPage> createState() => _EventPageState();
+  State<ListEventsPage> createState() => _ListEventsPageState();
 }
 
-class _EventPageState extends State<EventPage> implements EventView {
+class _ListEventsPageState extends State<ListEventsPage> implements EventView {
   late EventController controller;
   @override
   void initState() {
@@ -64,10 +65,14 @@ class _EventPageState extends State<EventPage> implements EventView {
                 children: [
                   for (var e in controller.events)
                     eventWidget(
-                      eventName: e['name'],
-                      eventDate: e['date'],
-                      finalEventDate: e['finalDate'],
-                      eventMaxScore: e['maxScore'],
+                      context,
+                      event: Event(
+                        eventID: e['objectId'],
+                        eventName: e['name'],
+                        eventDate: e['date'],
+                        finalEventDate: e['finalDate'],
+                        eventMaxScore: e['maxScore'],
+                      ),
                       onRemove: () => controller.removeEvent(e['objectId']),
                       onEdit: () => controller.getSpecificEvent(e['objectId']),
                     ),

@@ -1,4 +1,4 @@
-import 'package:aguia_real_dbv/src/modules/event/event_page.dart';
+import 'package:aguia_real_dbv/src/modules/event/list_events_page.dart';
 import 'package:aguia_real_dbv/src/modules/home/home_controller.dart';
 import 'package:aguia_real_dbv/src/modules/home/widgets/item_shortcut.dart';
 import 'package:aguia_real_dbv/src/shared/utils.dart';
@@ -47,7 +47,7 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       const CircleAvatar(
-                        minRadius: 45.0,
+                        minRadius: 30.0,
                         backgroundColor: Colors.white,
                         backgroundImage: NetworkImage(
                             'https://avatars.githubusercontent.com/u/32440959?s=40&v=4'),
@@ -58,26 +58,26 @@ class _HomePageState extends State<HomePage> {
                           Text(
                             controller.currentUser!['name'],
                             style: const TextStyle(
-                                color: Colors.white, fontSize: 20.0),
+                                color: Colors.white, fontSize: 15.0),
                           ),
                           Text(
                             'Unidade: ' + controller.currentUser!['unity'],
                             style: const TextStyle(
-                                color: Colors.white, fontSize: 15.0),
+                                color: Colors.white, fontSize: 10.0),
                           ),
                         ],
                       ),
                       Icon(
                         Icons.person,
                         color: Utils.greyLight,
-                        size: 40,
+                        size: 30,
                       ),
                       InkWell(
                         onTap: () {},
                         child: Icon(
                           Icons.logout,
                           color: Utils.greyLight,
-                          size: 40,
+                          size: 30,
                         ),
                       ),
                     ],
@@ -131,37 +131,22 @@ class _HomePageState extends State<HomePage> {
                           onTap: () => Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => const EventPage(),
+                              builder: (_) => const ListEventsPage(),
                             ),
                           ),
                           child: itemShortCut(Icons.event_note, 'Eventos'),
                         ),
                         InkWell(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const EventPage(),
-                            ),
-                          ),
+                          onTap: () {},
                           child: itemShortCut(Icons.description, 'Relatórios'),
                         ),
                         InkWell(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const EventPage(),
-                            ),
-                          ),
+                          onTap: () {},
                           child: itemShortCut(
                               Icons.perm_contact_calendar, 'Informações'),
                         ),
                         InkWell(
-                          onTap: () => Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => const EventPage(),
-                            ),
-                          ),
+                          onTap: () {},
                           child: itemShortCut(Icons.group, 'Meu Clube'),
                         ),
                       ],

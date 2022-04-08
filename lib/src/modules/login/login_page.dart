@@ -1,6 +1,6 @@
 import 'package:aguia_real_dbv/src/modules/home/home_page.dart';
 import 'package:aguia_real_dbv/src/modules/login/login_controller.dart';
-import 'package:aguia_real_dbv/src/modules/ranking/unity_ranking_page.dart';
+import 'package:aguia_real_dbv/src/modules/ranking/show_unity_ranking.dart';
 import 'package:aguia_real_dbv/src/shared/utils.dart';
 import 'package:aguia_real_dbv/src/views/login_view.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -30,6 +30,7 @@ class _LoginPageState extends State<LoginPage> implements LoginView {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const SizedBox(height: 100.0),
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Container(
@@ -132,7 +133,7 @@ class _LoginPageState extends State<LoginPage> implements LoginView {
                         onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => const UnityRankingPage(),
+                            builder: (_) => const ShowUnityRanking(),
                           ),
                         ),
                         child: Container(
@@ -150,7 +151,7 @@ class _LoginPageState extends State<LoginPage> implements LoginView {
                               'ACOMPANHAR PONTUAÇÃO',
                               style: TextStyle(
                                 color: Utils.darkBlue,
-                                fontSize: 20.0,
+                                fontSize: 15.0,
                               ),
                             ),
                           ),
