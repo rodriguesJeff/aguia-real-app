@@ -5,12 +5,14 @@ class UnityRankingRepository {
   Future<bool> setUnityScore({
     required String eventId,
     required String unityId,
-    required String score,
+    required num score,
+    required String reason,
   }) async {
     try {
       var registerRanking = ParseObject('Ranking')
         ..set('unity', ParseObject('Unitys')..objectId = unityId)
-        ..set('score', score);
+        ..set('score', score)
+        ..set('reason', reason);
 
       var event = ParseObject('Event')
         ..objectId = eventId

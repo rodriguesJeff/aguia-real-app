@@ -1,25 +1,31 @@
 import 'package:aguia_real_dbv/src/modules/ranking/unity_ranking_controller.dart';
+import 'package:aguia_real_dbv/src/shared/models/event.dart';
+import 'package:aguia_real_dbv/src/shared/services/get_unity_logo.dart';
 import 'package:aguia_real_dbv/src/shared/utils.dart';
+import 'package:aguia_real_dbv/src/views/unity_view.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
 
 class SetUnityRanking extends StatefulWidget {
-  const SetUnityRanking({Key? key}) : super(key: key);
+  const SetUnityRanking({Key? key, required this.event}) : super(key: key);
+
+  final Event event;
 
   @override
   State<SetUnityRanking> createState() => _SetUnityRankingState();
 }
 
-class _SetUnityRankingState extends State<SetUnityRanking> {
+class _SetUnityRankingState extends State<SetUnityRanking>
+    implements UnityView {
   late UnityRankingController controller;
 
   final GlobalKey expansionTile = GlobalKey();
 
   @override
   void initState() {
-    controller = UnityRankingController();
+    controller = UnityRankingController(view: this, event: widget.event);
     controller.initScreen();
     super.initState();
   }
@@ -62,7 +68,7 @@ class _SetUnityRankingState extends State<SetUnityRanking> {
                             for (var unity in controller.unityes)
                               InkWell(
                                 onTap: () {
-                                  print(unity['objectId']);
+                                  controller.setUnity(unity);
                                 },
                                 child: ListTile(
                                   title: Text(
@@ -76,13 +82,34 @@ class _SetUnityRankingState extends State<SetUnityRanking> {
                       ),
                       const SizedBox(height: 20.0),
                       const Text(
-                        'ADICIONAR PONTOS DA UNIDADE\nunidade',
+                        'ADICIONAR PONTOS DA UNIDADE',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
+                      Observer(builder: (_) {
+                        if (controller.unity != null) {
+                          return Text(
+                            controller.unity!['name'],
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          );
+                        } else {
+                          return const Text(
+                            'escolha a unidade',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          );
+                        }
+                      }),
                       const SizedBox(height: 30.0),
                       const Text(
                         'Razão da pontuação',
@@ -91,7 +118,10 @@ class _SetUnityRankingState extends State<SetUnityRanking> {
                       ),
                       const SizedBox(height: 10.0),
                       TextField(
-                        // onChanged: controller.setEventName,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                        onChanged: controller.setReason,
                         decoration: InputDecoration(
                           hintText: 'Arrecadação de alimentos',
                           hintStyle: TextStyle(color: Utils.greyMid),
@@ -107,7 +137,10 @@ class _SetUnityRankingState extends State<SetUnityRanking> {
                       ),
                       const SizedBox(height: 10.0),
                       TextField(
-                        // onChanged: controller.setEventName,
+                        style: const TextStyle(
+                          color: Colors.white,
+                        ),
+                        onChanged: controller.setScore,
                         keyboardType: TextInputType.number,
                         decoration: InputDecoration(
                           hintText: '10 pontos',
@@ -134,20 +167,27 @@ class _SetUnityRankingState extends State<SetUnityRanking> {
                         child: Column(
                           children: [
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                const CircleAvatar(
-                                  backgroundImage: AssetImage(
-                                      'assets/images/unityes/unidade-aguia.jpeg'),
-                                  radius: 30,
+                                Padding(
+                                  padding: const EdgeInsets.all(10.0),
+                                  child: CircleAvatar(
+                                    backgroundImage: AssetImage(getUnityLogo(
+                                        controller.unity?['name'] ??
+                                            'assets/images/unityes/unidade-aguia.jpeg')),
+                                    radius: 30,
+                                  ),
                                 ),
-                                const DottedLine(
-                                  direction: Axis.vertical,
-                                  lineLength: 80.0,
-                                  lineThickness: 1.0,
-                                  dashLength: 4.0,
-                                  dashColor: Colors.black,
-                                  dashGapLength: 4.0,
+                                const Padding(
+                                  padding: EdgeInsets.only(right: 10.0),
+                                  child: DottedLine(
+                                    direction: Axis.vertical,
+                                    lineLength: 80.0,
+                                    lineThickness: 1.0,
+                                    dashLength: 4.0,
+                                    dashColor: Colors.black,
+                                    dashGapLength: 4.0,
+                                  ),
                                 ),
                                 Column(
                                   mainAxisAlignment:
@@ -155,10 +195,11 @@ class _SetUnityRankingState extends State<SetUnityRanking> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'razão da pontuação'.toUpperCase(),
+                                      controller.reason?.toUpperCase() ??
+                                          'razão da pontuação'.toUpperCase(),
                                       style: TextStyle(
                                         color: Utils.greyMid,
-                                        fontSize: 15.0,
+                                        fontSize: 12.0,
                                       ),
                                     ),
                                     Row(
@@ -166,7 +207,7 @@ class _SetUnityRankingState extends State<SetUnityRanking> {
                                           CrossAxisAlignment.end,
                                       children: [
                                         Text(
-                                          '10',
+                                          controller.score?.toString() ?? '0',
                                           style: TextStyle(
                                             color: Utils.greyDark,
                                             fontWeight: FontWeight.bold,
@@ -181,11 +222,13 @@ class _SetUnityRankingState extends State<SetUnityRanking> {
                                             fontSize: 12.0,
                                           ),
                                         ),
+                                        const SizedBox.shrink(),
                                       ],
                                     ),
                                     const SizedBox(height: 10.0),
                                     Text(
-                                      'nome do evento realizado',
+                                      controller.event?.eventName ??
+                                          'nome do evento',
                                       style: TextStyle(
                                         color: Utils.greyMid,
                                         fontSize: 10.0,
@@ -197,12 +240,19 @@ class _SetUnityRankingState extends State<SetUnityRanking> {
                             ),
                             const SizedBox(height: 15.0),
                             ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                controller.submitScore;
+                              },
                               style: ElevatedButton.styleFrom(
                                   primary: Utils.greenAction),
-                              child: const Padding(
-                                padding: EdgeInsets.all(10.0),
-                                child: Text('SALVAR'),
+                              child: Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: controller.isregistering
+                                    ? LoadingAnimationWidget.inkDrop(
+                                        color: Colors.white,
+                                        size: 20,
+                                      )
+                                    : const Text('SALVAR'),
                               ),
                             ),
                           ],
@@ -214,5 +264,10 @@ class _SetUnityRankingState extends State<SetUnityRanking> {
         ),
       ),
     );
+  }
+
+  @override
+  backToEventDetailsPage() {
+    Navigator.pop(context);
   }
 }

@@ -131,7 +131,7 @@ class EventDetails extends StatelessWidget {
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => const SetUnityRanking(),
+                      builder: (_) => SetUnityRanking(event: event),
                     ),
                   ),
                   style: ElevatedButton.styleFrom(primary: Utils.greenAction),
