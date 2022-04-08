@@ -30,6 +30,7 @@ dev_dependencies:
   image_picker:
   loading_animation_widget:
   flutter_rating_bar:
+  dotted_line: 
 
 flutter:
 

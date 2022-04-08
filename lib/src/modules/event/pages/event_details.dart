@@ -1,3 +1,4 @@
+import 'package:aguia_real_dbv/src/modules/ranking/set_unity_ranking.dart';
 import 'package:aguia_real_dbv/src/shared/models/event.dart';
 import 'package:aguia_real_dbv/src/shared/utils.dart';
 import 'package:flutter/material.dart';
@@ -127,7 +128,12 @@ class EventDetails extends StatelessWidget {
                 ),
                 const SizedBox(height: 10.0),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const SetUnityRanking(),
+                    ),
+                  ),
                   style: ElevatedButton.styleFrom(primary: Utils.greenAction),
                   child: const Padding(
                     padding: EdgeInsets.all(16.0),
