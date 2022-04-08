@@ -33,6 +33,12 @@ abstract class _HomeControllerBase with Store {
   }
 
   @action
+  Future<void> logout() async {
+    await userRepository.logout();
+    // view.navToLoginPage();
+  }
+
+  @action
   Future<void> getUnityes() async {
     unityes = await unityRepository.getUnityes();
   }

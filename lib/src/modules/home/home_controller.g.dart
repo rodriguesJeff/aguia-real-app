@@ -62,6 +62,13 @@ mixin _$HomeController on _HomeControllerBase, Store {
     return _$getCurrentUserAsyncAction.run(() => super.getCurrentUser());
   }
 
+  final _$logoutAsyncAction = AsyncAction('_HomeControllerBase.logout');
+
+  @override
+  Future<void> logout() {
+    return _$logoutAsyncAction.run(() => super.logout());
+  }
+
   final _$getUnityesAsyncAction = AsyncAction('_HomeControllerBase.getUnityes');
 
   @override

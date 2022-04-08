@@ -17,4 +17,11 @@ class UserRepository {
       return currentUser;
     }
   }
+
+  Future<void> logout() async {
+    ParseUser? currentUser = await ParseUser.currentUser() as ParseUser?;
+    if (currentUser != null) {
+      await currentUser.logout();
+    }
+  }
 }
