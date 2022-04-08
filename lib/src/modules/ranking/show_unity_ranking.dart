@@ -1,4 +1,5 @@
 import 'package:aguia_real_dbv/src/modules/ranking/unity_ranking_controller.dart';
+import 'package:aguia_real_dbv/src/shared/services/get_unity_logo.dart';
 import 'package:aguia_real_dbv/src/shared/utils.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -58,9 +59,9 @@ class _ShowUnityRankingState extends State<ShowUnityRanking> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const CircleAvatar(
-                                backgroundImage: AssetImage(
-                                    'assets/images/unityes/unidade-aguia.jpeg'),
+                              CircleAvatar(
+                                backgroundImage:
+                                    AssetImage(getUnityLogo(unity['name'])),
                                 radius: 30,
                               ),
                               Column(

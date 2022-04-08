@@ -138,7 +138,7 @@ class _SetUnityRankingState extends State<SetUnityRanking> {
                               children: [
                                 const CircleAvatar(
                                   backgroundImage: AssetImage(
-                                      'assets/images/unityes/unidade-aguia-marinha.jpeg'),
+                                      'assets/images/unityes/unidade-aguia.jpeg'),
                                   radius: 30,
                                 ),
                                 const DottedLine(
