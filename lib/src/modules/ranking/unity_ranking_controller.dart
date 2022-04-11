@@ -89,7 +89,7 @@ abstract class _UnityRankingControllerBase with Store {
     unityes = await unityRankingRepository.getUnityesRanking(eventId: eventID);
 
     for (var u in unityes) {
-      lista.forEach((element) {
+      for (var element in lista) {
         if (element.name == 'Unidade Gavião' &&
             u['unityName'] == element.name) {
           element.score = element.score + u['score'];
@@ -107,7 +107,7 @@ abstract class _UnityRankingControllerBase with Store {
           element.score = element.score + u['score'];
           element.stars = getStars(element.score + u['score']);
         }
-      });
+      }
     }
 
     isLoading = false;
