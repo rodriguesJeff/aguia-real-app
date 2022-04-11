@@ -5,6 +5,7 @@ class Event {
     required this.eventDate,
     required this.finalEventDate,
     required this.eventMaxScore,
+    this.rankingId,
   });
 
   final String eventID;
@@ -12,4 +13,5 @@ class Event {
   final DateTime eventDate;
   final DateTime finalEventDate;
   final num eventMaxScore;
+  final String? rankingId;
 }

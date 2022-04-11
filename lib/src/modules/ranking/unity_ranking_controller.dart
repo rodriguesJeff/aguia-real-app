@@ -1,6 +1,8 @@
 import 'package:aguia_real_dbv/src/modules/ranking/unity_ranking_repository.dart';
 import 'package:aguia_real_dbv/src/shared/data/unity_repository.dart';
 import 'package:aguia_real_dbv/src/shared/models/event.dart';
+import 'package:aguia_real_dbv/src/shared/models/unity_ranked.dart';
+import 'package:aguia_real_dbv/src/shared/services/get_stars.dart';
 import 'package:aguia_real_dbv/src/views/unity_view.dart';
 import 'package:mobx/mobx.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
@@ -17,7 +19,8 @@ abstract class _UnityRankingControllerBase with Store {
 
   @action
   void initScreen() {
-    getUnityesRanking();
+    getUnityes();
+    getUnityesRanking('DYSWFhg6Ln');
   }
 
   @observable
@@ -34,6 +37,9 @@ abstract class _UnityRankingControllerBase with Store {
   List<ParseObject> unityes = [];
 
   @observable
+  List<ParseObject> unityesNames = [];
+
+  @observable
   ParseObject? unity;
 
   @observable
@@ -46,14 +52,71 @@ abstract class _UnityRankingControllerBase with Store {
   @observable
   num? score;
 
+  @observable
+  UnityRanked gaviao = UnityRanked(name: 'Unidade Gavião');
+
+  @observable
+  UnityRanked aguiaMarinha = UnityRanked(name: 'Águia Marinha');
+
+  @observable
+  UnityRanked aguia = UnityRanked(name: 'Unidade Águia');
+
+  @observable
+  UnityRanked gaivotaReal = UnityRanked(name: 'Gaivota Real');
+
+  @observable
+  List<UnityRanked> lista = [
+    UnityRanked(name: 'Gaivota Real'),
+    UnityRanked(name: 'Unidade Águia'),
+    UnityRanked(name: 'Águia Marinha'),
+    UnityRanked(name: 'Unidade Gavião'),
+  ];
+
   @action
-  void setScore(String value) => score = int.parse(value);
+  void setScore(String value) {
+    if (value == '') {
+      score = 0;
+    } else {
+      score = int.parse(value);
+    }
+  }
+
   bool get isScoreValid => score != null && score! > 0;
 
   @action
-  Future<void> getUnityesRanking() async {
+  Future<void> getUnityesRanking(String eventID) async {
     isLoading = true;
-    unityes = await unityRepository.getUnityes();
+    unityes = await unityRankingRepository.getUnityesRanking(eventId: eventID);
+
+    for (var u in unityes) {
+      lista.forEach((element) {
+        if (element.name == 'Unidade Gavião' &&
+            u['unityName'] == element.name) {
+          element.score = element.score + u['score'];
+          element.stars = getStars(element.score + u['score']);
+        } else if (element.name == 'Gaivota Real' &&
+            u['unityName'] == element.name) {
+          element.score = element.score + u['score'];
+          element.stars = getStars(element.score + u['score']);
+        } else if (element.name == 'Unidade Águia' &&
+            u['unityName'] == element.name) {
+          element.score = element.score + u['score'];
+          element.stars = getStars(element.score + u['score']);
+        } else if (element.name == 'Águia Marinha' &&
+            u['unityName'] == element.name) {
+          element.score = element.score + u['score'];
+          element.stars = getStars(element.score + u['score']);
+        }
+      });
+    }
+
+    isLoading = false;
+  }
+
+  @action
+  Future<void> getUnityes() async {
+    isLoading = true;
+    unityesNames = await unityRepository.getUnityes();
     isLoading = false;
   }
 
@@ -71,6 +134,7 @@ abstract class _UnityRankingControllerBase with Store {
     final response = await unityRankingRepository.setUnityScore(
       eventId: event!.eventID,
       unityId: unity!['objectId'],
+      unityName: unity!['name'],
       score: score!,
       reason: reason!,
     );

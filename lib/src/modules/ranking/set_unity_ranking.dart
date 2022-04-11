@@ -65,7 +65,7 @@ class _SetUnityRankingState extends State<SetUnityRanking>
                           title: const Text('Unidades'),
                           backgroundColor: Colors.white,
                           children: [
-                            for (var unity in controller.unityes)
+                            for (var unity in controller.unityesNames)
                               InkWell(
                                 onTap: () {
                                   controller.setUnity(unity);
