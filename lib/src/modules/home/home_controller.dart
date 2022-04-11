@@ -1,5 +1,6 @@
 import 'package:aguia_real_dbv/src/shared/data/unity_repository.dart';
 import 'package:aguia_real_dbv/src/shared/data/user_repository.dart';
+import 'package:aguia_real_dbv/src/views/home_view.dart';
 import 'package:mobx/mobx.dart';
 import 'package:parse_server_sdk_flutter/parse_server_sdk.dart';
 part 'home_controller.g.dart';
@@ -7,6 +8,10 @@ part 'home_controller.g.dart';
 class HomeController = _HomeControllerBase with _$HomeController;
 
 abstract class _HomeControllerBase with Store {
+  _HomeControllerBase(this.view);
+
+  final HomeView view;
+
   @action
   void initApp() {
     getCurrentUser();
@@ -35,7 +40,7 @@ abstract class _HomeControllerBase with Store {
   @action
   Future<void> logout() async {
     await userRepository.logout();
-    // view.navToLoginPage();
+    view.backToLoginPage();
   }
 
   @action

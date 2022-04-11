@@ -1,6 +1,8 @@
 import 'package:aguia_real_dbv/src/modules/event/list_events_page.dart';
 import 'package:aguia_real_dbv/src/modules/home/home_controller.dart';
 import 'package:aguia_real_dbv/src/modules/home/widgets/item_shortcut.dart';
+import 'package:aguia_real_dbv/src/modules/login/login_page.dart';
+import 'package:aguia_real_dbv/src/views/home_view.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:aguia_real_dbv/src/shared/utils.dart';
 import 'package:flutter/material.dart';
@@ -13,13 +15,13 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> implements HomeView {
   final GlobalKey expansionTile = GlobalKey();
   late HomeController controller;
 
   @override
   void initState() {
-    controller = HomeController();
+    controller = HomeController(this);
     controller.initApp();
     super.initState();
   }
@@ -75,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                           size: 30,
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () => controller.logout(),
                           child: Icon(
                             Icons.logout,
                             color: Utils.greyLight,
@@ -203,5 +205,11 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+  }
+
+  @override
+  backToLoginPage() {
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (_) => const LoginPage()));
   }
 }
