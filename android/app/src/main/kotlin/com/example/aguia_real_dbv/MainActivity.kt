@@ -1,4 +1,4 @@
-package com.example.aguia_real_dbv
+package com.aguia_real.app
 
 import io.flutter.embedding.android.FlutterActivity
 

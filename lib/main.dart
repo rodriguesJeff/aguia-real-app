@@ -13,6 +13,7 @@ void main() async {
   );
   runApp(
     const MaterialApp(
+      title: 'Águia Real App',
       debugShowCheckedModeBanner: false,
       home: SplashPage(),
     ),
