@@ -1,8 +1,25 @@
+import 'package:aguia_real_dbv/src/modules/login/login_page.dart';
+import 'package:aguia_real_dbv/src/modules/splash/splash_controller.dart';
 import 'package:aguia_real_dbv/src/shared/utils.dart';
+import 'package:aguia_real_dbv/src/views/splash_view.dart';
 import 'package:flutter/material.dart';
 
-class SplashPage extends StatelessWidget {
+class SplashPage extends StatefulWidget {
   const SplashPage({Key? key}) : super(key: key);
+
+  @override
+  State<SplashPage> createState() => _SplashPageState();
+}
+
+class _SplashPageState extends State<SplashPage> implements SplashView {
+  late SplashController controller;
+
+  @override
+  void initState() {
+    controller = SplashController(this);
+    controller.initApp();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +43,16 @@ class SplashPage extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  @override
+  navToLoginPage() {
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => const LoginPage(),
       ),
     );
   }

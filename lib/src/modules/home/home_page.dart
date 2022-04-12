@@ -210,6 +210,10 @@ class _HomePageState extends State<HomePage> implements HomeView {
   @override
   backToLoginPage() {
     Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (_) => const LoginPage()));
+      context,
+      MaterialPageRoute(
+        builder: (_) => const LoginPage(),
+      ),
+    );
   }
 }
