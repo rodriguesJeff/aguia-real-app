@@ -1,16 +1,23 @@
-# aguia_real_dbv
+# Águia Real
 
-A new Flutter project.
+Aplicativo em Flutter para o clube de Desbravadores Águia Real 
 
-## Getting Started
+## Conheça-nos
+- [Página do Águia Real](https://clubes.adventistas.org/br/apec/11334/aguia-real/)
 
-This project is a starting point for a Flutter application.
+## Conheça os Desbravadores
+Os Desbravadores, também conhecidos como Clube de Desbravadores, são um departamento da Igreja Adventista do Sétimo Dia, que trabalha especificamente com a educação cultural, social e religiosa de crianças e adolescentes situadas na faixa etária entre 10 e 15 anos.
 
-A few resources to get you started if this is your first Flutter project:
+- [Descrição no WikiPedia](https://pt.wikipedia.org/wiki/Desbravadores)
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+### Encontre um clube e faça parte da nação de lenço:
+- [Clique aqui e encontre um clube](https://clubes.adventistas.org/br/)
+
+Desenvolvido pelo instrutor de classes Jefferson Rodrigues
+
+Você pode clonar esse repo e usar para criar o app do seu clube!
+
+A mensagem do advento a todo mundo em minha geração
+Jesus está voltando!
