@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> implements HomeView {
                           minRadius: 30.0,
                           backgroundColor: Colors.white,
                           backgroundImage: NetworkImage(
-                              'https://avatars.githubusercontent.com/u/32440959?s=40&v=4'),
+                              'https://yt3.ggpht.com/ytc/AKedOLQxGyuqgEVOWVcCJWKKEFINPBe-4tY4KRb9yh4MbA=s88-c-k-c0x00ffffff-no-rj'),
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
