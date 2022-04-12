@@ -141,68 +141,6 @@ mixin _$UnityRankingController on _UnityRankingControllerBase, Store {
     });
   }
 
-  final _$gaviaoAtom = Atom(name: '_UnityRankingControllerBase.gaviao');
-
-  @override
-  UnityRanked get gaviao {
-    _$gaviaoAtom.reportRead();
-    return super.gaviao;
-  }
-
-  @override
-  set gaviao(UnityRanked value) {
-    _$gaviaoAtom.reportWrite(value, super.gaviao, () {
-      super.gaviao = value;
-    });
-  }
-
-  final _$aguiaMarinhaAtom =
-      Atom(name: '_UnityRankingControllerBase.aguiaMarinha');
-
-  @override
-  UnityRanked get aguiaMarinha {
-    _$aguiaMarinhaAtom.reportRead();
-    return super.aguiaMarinha;
-  }
-
-  @override
-  set aguiaMarinha(UnityRanked value) {
-    _$aguiaMarinhaAtom.reportWrite(value, super.aguiaMarinha, () {
-      super.aguiaMarinha = value;
-    });
-  }
-
-  final _$aguiaAtom = Atom(name: '_UnityRankingControllerBase.aguia');
-
-  @override
-  UnityRanked get aguia {
-    _$aguiaAtom.reportRead();
-    return super.aguia;
-  }
-
-  @override
-  set aguia(UnityRanked value) {
-    _$aguiaAtom.reportWrite(value, super.aguia, () {
-      super.aguia = value;
-    });
-  }
-
-  final _$gaivotaRealAtom =
-      Atom(name: '_UnityRankingControllerBase.gaivotaReal');
-
-  @override
-  UnityRanked get gaivotaReal {
-    _$gaivotaRealAtom.reportRead();
-    return super.gaivotaReal;
-  }
-
-  @override
-  set gaivotaReal(UnityRanked value) {
-    _$gaivotaRealAtom.reportWrite(value, super.gaivotaReal, () {
-      super.gaivotaReal = value;
-    });
-  }
-
   final _$listaAtom = Atom(name: '_UnityRankingControllerBase.lista');
 
   @override
@@ -298,10 +236,6 @@ unityesNames: ${unityesNames},
 unity: ${unity},
 reason: ${reason},
 score: ${score},
-gaviao: ${gaviao},
-aguiaMarinha: ${aguiaMarinha},
-aguia: ${aguia},
-gaivotaReal: ${gaivotaReal},
 lista: ${lista},
 submitScore: ${submitScore}
     ''';

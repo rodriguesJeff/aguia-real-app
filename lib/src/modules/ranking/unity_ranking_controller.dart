@@ -53,18 +53,6 @@ abstract class _UnityRankingControllerBase with Store {
   num? score;
 
   @observable
-  UnityRanked gaviao = UnityRanked(name: 'Unidade Gavião');
-
-  @observable
-  UnityRanked aguiaMarinha = UnityRanked(name: 'Águia Marinha');
-
-  @observable
-  UnityRanked aguia = UnityRanked(name: 'Unidade Águia');
-
-  @observable
-  UnityRanked gaivotaReal = UnityRanked(name: 'Gaivota Real');
-
-  @observable
   List<UnityRanked> lista = [
     UnityRanked(name: 'Gaivota Real'),
     UnityRanked(name: 'Unidade Águia'),
