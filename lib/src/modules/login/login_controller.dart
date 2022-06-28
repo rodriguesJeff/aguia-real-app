@@ -16,10 +16,13 @@ abstract class _LoginControllerBase with Store {
   @observable
   String username = "";
   String password = "";
-  bool isLoading = false;
+  bool loading = false;
 
   @action
   void setUsername(String value) => username = value;
+
+  @computed
+  bool get isLoading => loading;
 
   @computed
   bool get isUserNameValid {
@@ -55,12 +58,13 @@ abstract class _LoginControllerBase with Store {
 
   @action
   Future<void> login() async {
-    isLoading = true;
+    loading = true;
     Future.delayed(const Duration(seconds: 1));
     final response = await repository.login(username, password);
     if (response.success) {
-      isLoading = false;
+      loading = false;
       view.navToHomePage();
     }
+    loading = true;
   }
 }

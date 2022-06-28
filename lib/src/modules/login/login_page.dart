@@ -45,6 +45,11 @@ class _LoginPageState extends State<LoginPage> implements LoginView {
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      // Image.asset(
+                      //   'assets/images/logo-aguia-real.jpg',
+                      //   width: 100,
+                      //   height: 100,
+                      // ),
                       Text(
                         'LOGIN',
                         style: TextStyle(
